@@ -1,0 +1,66 @@
+//DHT
+#include "DHT.h"
+#define pinDHT 6
+
+//BMP
+#include <Wire.h>
+#include <Adafruit_BMP085.h>
+
+
+#define typDHT22 DHT22  
+
+Adafruit_BMP085 bmp180;
+
+
+DHT mojeDHT(pinDHT, typDHT22);
+
+int korekce = 32;
+
+
+void setup() {
+ Serial.begin(9600); 
+ mojeDHT.begin();
+ bmp180.begin();
+
+  
+}
+
+
+
+void loop() {
+
+  float tep = mojeDHT.readTemperature();
+  float vlh = mojeDHT.readHumidity();
+  
+  if (isnan(tep) || isnan(vlh)) {
+
+    Serial.println("Chyba při čtení z DHT senzoru!");
+  } else {
+    Serial.print("Teplota: "); 
+    Serial.print(tep);
+    Serial.print(" stupnu Celsia, ");
+    Serial.print("vlhkost: "); 
+    Serial.print(vlh);
+    Serial.println("  %");
+    Serial.println("------------------------------");
+  }
+  
+ Serial.print("Barometricky tlak: ");
+ Serial.print((bmp180.readPressure())/100.00);
+ Serial.println(" hPa");
+
+
+ Serial.println("------------------------------");
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ delay(5000);
+}
