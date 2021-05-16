@@ -10,13 +10,8 @@ void setup() {
 }
 void loop() {
  
- luup = luup + 1;
- sensorValue = sensorValue + analogRead(A1);
- if (luup > 10){
-    sensorValue = sensorValue / luup;
+     sensorValue = analogRead(A1);
     Serial.println(sensorValue);
      
-    }
-   delay(100);
    
 }
