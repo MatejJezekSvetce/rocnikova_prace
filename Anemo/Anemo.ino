@@ -1,8 +1,5 @@
-  long x;
-  long x2;
-  long delta;
-  long poc;
-  long luup = 0;
+  int poc;
+  int luup = 0;
   int sensorValue;
 
 
@@ -12,23 +9,14 @@ void setup() {
 
 }
 void loop() {
-  x = millis;
-  
-  luup = luup + 1;
-  sensorValue = sensorValue + analogRead(A1);
-  if (poc > 1000){
-   
+ 
+ luup = luup + 1;
+ sensorValue = sensorValue + analogRead(A1);
+ if (luup > 10){
     sensorValue = sensorValue / luup;
-     Serial.println(sensorValue);
+    Serial.println(sensorValue);
      
-    
-    
-    poc = 0;
     }
-
-    x2 = millis;
-   delta = x2 - x;
-   
-   poc = poc + delta;
+   delay(100);
    
 }
